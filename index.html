@@ -49,6 +49,104 @@
                 height: auto;
             }
         }
+        .tier {
+      border: 1px solid #444;
+      display: flex;
+      flex-direction: column;
+      background: #1f1f1f;
+    }
+    .row {
+      display: flex;
+      flex-direction: row;
+      border-bottom: 1px solid #111;
+      transition: all .3s ease;
+
+      &.drag-over {
+        background: #555;
+        scale: 1.01;
+      }
+    }
+
+    .label {
+      cursor: pointer;
+      background: var(--level, #09f);
+      color: #333;
+      font-weight: bold;
+      width: 50px;
+      height: 50px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & span:focus {
+        outline: 1px solid #fff;
+      }
+    }
+
+    #selector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    #selector-buttons {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+
+      & button,
+      & label {
+        cursor: pointer;
+        transition: all .3s ease;
+        background: #222;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        padding: 4px;
+
+        &:hover {
+          background: #444;
+          scale: 1.1;
+        }
+      }
+
+      & svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    #selector-items {
+      border: 1px solid #666;
+      width: 100%;
+      height: 100px;
+      margin-bottom: 100px;
+      display: flex;
+      flex-wrap: wrap;
+
+      &.drag-files {
+        background: #555;
+        border-style: dashed;
+      }
+    }
+
+    .item-image {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      background: #fff;
+      cursor: grab;
+
+      &.drag-preview {
+        opacity: .5;
+        pointer-events: none;
+      }
+    }
         
     </style>
 </head>
@@ -60,7 +158,7 @@
     <section class="tier">
         <div class="row">
             <aside class="label">
-                <span>S</span>
+                <span contenteditable="true">S</span>
             </aside>
         </div>
     </section>
