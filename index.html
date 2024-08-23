@@ -1,166 +1,257 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tier Maker</title>
+    <title>TiERMAKER - Crea y Comparte tus Rankings</title>
     <style>
-        /* Eligiendo colores  preestablecidos */ 
-         :root {
-      --color-s: #ff7f80;
-      --color-a: #ffc07f;
-      --color-b: #ffdf80;
-      --color-c: #fdff7f;
-      --color-d: #bfff7f;
-      --color-e: #7fff7f;
-    }
-    /* Border box calcula el ancho y alto de las cajas */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
-    button {
-        background: transparent;
-        border: 0;
-        color: #fff;
-        cursor: pointer;
-    }
+        :root {
+            --color-s: #ff7f7f;
+            --color-a: #ffbf7f;
+            --color-b: #ffdf7f;
+            --color-c: #ffff7f;
+            --color-d: #bfff7f;
+            --color-e: #7fff7f;
+        }
         body {
             background: #111;
             color: #fff;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 
-            'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 
-            'Open Sans', 'Helvetica Neue', sans-serif;
-            margin: 0 auto;
-            max-width: 500px;
-            padding-inline: 32px;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
             user-select: none;
-        
         }
         #top-header {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding-block: 8px;
-           
-            & img{
-                max-width: 150px;
-                height: auto;
-            }
+            margin-bottom: 20px;
+        }
+        #top-header img {
+            max-width: 200px;
+            height: auto;
         }
         .tier {
-      border: 1px solid #444;
-      display: flex;
-      flex-direction: column;
-      background: #1f1f1f;
-    }
-    .row {
-      display: flex;
-      flex-direction: row;
-      border-bottom: 1px solid #111;
-      transition: all .3s ease;
-
-      &.drag-over {
-        background: #555;
-        scale: 1.01;
-      }
-    }
-
-    .label {
-      cursor: pointer;
-      background: var(--level, #09f);
-      color: #333;
-      font-weight: bold;
-      width: 50px;
-      height: 50px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      & span:focus {
-        outline: 1px solid #fff;
-      }
-    }
-
-    #selector {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      margin-top: 16px;
-    }
-
-    #selector-buttons {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-
-      & button,
-      & label {
-        cursor: pointer;
-        transition: all .3s ease;
-        background: #222;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 24px;
-        height: 24px;
-        padding: 4px;
-
-        &:hover {
-          background: #444;
-          scale: 1.1;
+            border: 1px solid #333;
+            display: flex;
+            flex-direction: column;
         }
-      }
-
-      & svg {
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    #selector-items {
-      border: 1px solid #666;
-      width: 100%;
-      height: 100px;
-      margin-bottom: 100px;
-      display: flex;
-      flex-wrap: wrap;
-
-      &.drag-files {
-        background: #555;
-        border-style: dashed;
-      }
-    }
-
-    .item-image {
-      width: 50px;
-      height: 50px;
-      object-fit: cover;
-      background: #fff;
-      cursor: grab;
-
-      &.drag-preview {
-        opacity: .5;
-        pointer-events: none;
-      }
-    }
-        
+        .row {
+            display: flex;
+            border-bottom: 1px solid #333;
+            min-height: 60px;
+        }
+        .label {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            color: #000;
+        }
+        .items {
+            flex-grow: 1;
+            min-height: 60px;
+            background: #1a1a1a;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 5px;
+        }
+        #selector {
+            margin-top: 20px;
+            border: 1px solid #333;
+            padding: 10px;
+        }
+        #selector-items {
+            min-height: 100px;
+            background: #1a1a1a;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 5px;
+        }
+        .item-image {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            cursor: move;
+            margin: 2px;
+        }
+        .icon-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 50%;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .icon-button:hover {
+            background-color: #e0e0e0;
+        }
+        .icon-button svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+        }
+        #controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        #add-image-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
     </style>
+    <!-- Importa html2canvas desde un CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
 </head>
 <body>
     <header id="top-header">
-        <img src="assets/tiermaker-logo2.png" />
+        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/tiermaker-logo2-kpRGdTkEBlVqYNDU1I2FgjZYdsvvDp.png" alt="TiERMAKER Logo">
     </header>
     
     <section class="tier">
         <div class="row">
-            <aside class="label">
-                <span contenteditable="true">S</span>
-            </aside>
+            <div class="label" style="background-color: var(--color-s);">S</div>
+            <div class="items"></div>
+        </div>
+        <div class="row">
+            <div class="label" style="background-color: var(--color-a);">A</div>
+            <div class="items"></div>
+        </div>
+        <div class="row">
+            <div class="label" style="background-color: var(--color-b);">B</div>
+            <div class="items"></div>
+        </div>
+        <div class="row">
+            <div class="label" style="background-color: var(--color-c);">C</div>
+            <div class="items"></div>
+        </div>
+        <div class="row">
+            <div class="label" style="background-color: var(--color-d);">D</div>
+            <div class="items"></div>
+        </div>
+        <div class="row">
+            <div class="label" style="background-color: var(--color-e);">E</div>
+            <div class="items"></div>
         </div>
     </section>
+
+    <section id="selector">
+        <div id="selector-items"></div>
+    </section>
+
+    <div id="controls">
+        <button class="icon-button" id="reset-tier-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M4.05 11a8 8 0 1 1 .5 4m-.5 5v-5h5" />
+            </svg>
+        </button>
+        
+        <button class="icon-button" id="save">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+        </button>
+    </div>
+    
+    <div style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
+        <input type="file" id="file-input" accept="image/*" multiple style="display: none;">
+
+        <button class="icon-button" id="add-image-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+                <path d="M9 12h6" />
+                <path d="M12 9v6" />
+            </svg>
+        </button>
+    </div>
+    
+    <script>
+      const selectorItems = document.getElementById('selector-items');
+      const tiers = document.querySelectorAll('.items');
+      const addImageButton = document.getElementById('add-image-btn');
+      const resetButton = document.getElementById('reset-tier-button');
+      const addSaveButton = document.getElementById('save');
+      const fileInput = document.getElementById('file-input');
+
+      // Función para guardar la imagen del contenedor
+      addSaveButton.addEventListener('click', () => {
+          html2canvas(document.querySelector('.tier')).then(canvas => {
+              const link = document.createElement('a');
+              link.href = canvas.toDataURL('image/png');
+              link.download = 'tier-list.png';
+              link.click();
+          });
+      });
+
+      // Función para manejar la carga de imágenes
+      fileInput.addEventListener('change', (e) => {
+          const files = e.target.files;
+          selectorItems.innerHTML = '';
+          Array.from(files).forEach(file => {
+              const img = document.createElement('img');
+              img.src = URL.createObjectURL(file);
+              img.className = 'item-image';
+              selectorItems.appendChild(img);
+              img.addEventListener('dragstart', (e) => {
+                  e.dataTransfer.setData('text/plain', file.name);
+              });
+          });
+      });
+
+      // Función para manejar la funcionalidad de arrastrar y soltar
+      tiers.forEach(tier => {
+          tier.addEventListener('dragover', (e) => {
+              e.preventDefault();
+          });
+          tier.addEventListener('drop', (e) => {
+              e.preventDefault();
+              const fileName = e.dataTransfer.getData('text/plain');
+              const file = Array.from(fileInput.files).find(f => f.name === fileName);
+              if (file) {
+                  const img = document.createElement('img');
+                  img.src = URL.createObjectURL(file);
+                  img.className = 'item-image';
+                  tier.appendChild(img);
+              }
+          });
+      });
+
+      // Función para manejar el botón de agregar imagen
+      addImageButton.addEventListener('click', () => {
+          fileInput.click();
+      });
+
+      // Función para manejar el botón de reinicio
+      resetButton.addEventListener('click', () => {
+          tiers.forEach(tier => {
+              tier.innerHTML = ''; // Limpiar las imágenes en cada tier
+          });
+          selectorItems.innerHTML = ''; // Limpiar las imágenes en el selector
+      });
+    </script>
 </body>
 </html>
